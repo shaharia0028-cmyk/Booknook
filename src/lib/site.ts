@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "A community library where readers share, borrow and return books.",
   contact: {
     email: "hello@booknook.com",
-    phone: "+880 1XXX-XXXXXX",
+    phone: "+880 17-00000000",
     address: "Bogura, Bangladesh",
   },
   social: {
