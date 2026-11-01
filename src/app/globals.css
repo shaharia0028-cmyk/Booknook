@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 40% 93%;
+    --foreground: 163 30% 13%;
+    --card: 42 50% 97%;
+    --card-foreground: 163 30% 13%;
+    --primary: 163 36% 21%;
+    --primary-foreground: 42 50% 96%;
+    --accent: 14 56% 44%;
+    --accent-foreground: 42 50% 98%;
+    --muted: 38 28% 87%;
+    --muted-foreground: 163 14% 33%;
+    --border: 38 24% 79%;
+    --ring: 14 56% 44%;
+    --footer: 163 36% 15%;
+    --footer-foreground: 42 40% 90%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 160 18% 8%;
+    --foreground: 40 30% 91%;
+    --card: 160 16% 11%;
+    --card-foreground: 40 30% 91%;
+    --primary: 40 38% 89%;
+    --primary-foreground: 160 22% 11%;
+    --accent: 14 60% 52%;
+    --accent-foreground: 42 50% 98%;
+    --muted: 160 14% 15%;
+    --muted-foreground: 40 14% 66%;
+    --border: 160 12% 21%;
+    --ring: 14 60% 52%;
+    --footer: 160 20% 6%;
+    --footer-foreground: 40 28% 86%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-semibold tracking-tight text-foreground md:text-4xl;
+  }
+
+  .section-text {
+    @apply text-base leading-7 text-muted-foreground md:text-lg;
+  }
+}
+
+.hero-swiper {
+  --swiper-pagination-color: hsl(var(--accent));
+  --swiper-pagination-bullet-inactive-color: hsl(var(--primary));
+  --swiper-pagination-bullet-inactive-opacity: 0.25;
+  --swiper-pagination-bullet-horizontal-gap: 4px;
+  --swiper-pagination-bottom: 1.25rem;
+}
+
+.hero-swiper .swiper-pagination-bullets.swiper-pagination-horizontal {
+  left: 0;
+  width: auto;
+}
