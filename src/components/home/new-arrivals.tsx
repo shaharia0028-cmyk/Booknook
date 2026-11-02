@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/section-heading";
 import { getLatestBooks } from "@/lib/books";
-import { BookCard } from "./book-card";
+import { BookCard } from "@/components/books/book-card";
 
 export async function NewArrivals() {
   const books = await getLatestBooks(6);

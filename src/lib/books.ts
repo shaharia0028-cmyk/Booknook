@@ -15,3 +15,21 @@ export async function getLatestBooks(limit = 6): Promise<Book[]> {
     return [];
   }
 }
+
+/** Public list for the All Books page, with optional search text and category. */
+export async function getBooks(filters: { search?: string; category?: string } = {}) {
+  if (!API_URL) return { books: [] as Book[], failed: true };
+
+  const query = new URLSearchParams();
+  if (filters.search) query.set("search", filters.search);
+  if (filters.category) query.set("category", filters.category);
+
+  try {
+    const res = await fetch(`${API_URL}/books?${query.toString()}`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`API responded with ${res.status}`);
+    return { books: (await res.json()) as Book[], failed: false };
+  } catch (error) {
+    console.error("Failed to load books:", error);
+    return { books: [] as Book[], failed: true };
+  }
+}

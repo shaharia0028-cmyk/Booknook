@@ -22,3 +22,4 @@ export const navLinks: NavLink[] = [
   { label: "My Books", href: "/my-books", private: true },
   { label: "My Borrows", href: "/my-borrows", private: true },
 ];
+export const bookCategories = ["Fiction", "Non-Fiction", "Science", "History", "Technology", "Children"] as const;
