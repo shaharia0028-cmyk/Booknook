@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookCard } from "@/components/books/book-card";
+import { Pagination } from "@/components/books/pagination";
 import { EmptyState } from "@/components/empty-state";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
@@ -12,11 +13,16 @@ import { bookCategories } from "@/lib/site";
 export const metadata: Metadata = { title: "All Books" };
 export const dynamic = "force-dynamic";
 
-type SearchParams = Promise<{ search?: string; category?: string }>;
+type SearchParams = Promise<{ search?: string; category?: string; page?: string }>;
 
 export default async function AllBooksPage({ searchParams }: { searchParams: SearchParams }) {
-  const { search = "", category = "" } = await searchParams;
-  const { books, failed } = await getBooks({ search: search.trim(), category });
+  const { search = "", category = "", page: pageParam } = await searchParams;
+  const requestedPage = Math.floor(Number(pageParam));
+  const { books, failed, page, pages } = await getBooks({
+    search: search.trim(),
+    category,
+    page: requestedPage >= 1 ? requestedPage : 1,
+  });
   const isFiltered = Boolean(search || category);
 
   return (
@@ -43,8 +49,8 @@ export default async function AllBooksPage({ searchParams }: { searchParams: Sea
             <EmptyState message="We could not load the books right now. Please try again in a moment." />
           ) : books.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {books.map((book) => (
-                <BookCard key={book._id} book={book} />
+              {books.map((book, index) => (
+                <BookCard key={book._id} book={book} priority={index < 3} />
               ))}
             </div>
           ) : (
@@ -54,6 +60,7 @@ export default async function AllBooksPage({ searchParams }: { searchParams: Sea
               actionHref={isFiltered ? "/books" : "/add-book"}
             />
           )}
+          {!failed && <Pagination page={page} pages={pages} search={search} category={category} />}
           {isFiltered && books.length > 0 && (
             <p className="mt-8 text-center text-sm text-muted-foreground">
               <Link href="/books" className="underline underline-offset-4 hover:text-accent">

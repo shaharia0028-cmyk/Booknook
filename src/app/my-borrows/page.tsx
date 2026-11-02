@@ -41,7 +41,7 @@ export default async function MyBorrowsPage() {
                 {borrows.map((borrow) => (
                   <tr key={borrow._id}>
                     <td className={tdClass}>
-                      <BookImage src={borrow.bookImage} alt={borrow.bookTitle} className="h-16 w-12 rounded-sm" />
+                      <BookImage src={borrow.bookImage} alt={borrow.bookTitle} sizes="48px" className="h-16 w-12 rounded-sm" />
                     </td>
                     <td className={`${tdClass} font-semibold`}>
                       <Link href={`/books/${borrow.bookId}`} className="hover:text-accent">

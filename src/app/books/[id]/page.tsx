@@ -35,7 +35,7 @@ export default async function BookDetailsPage({ params }: { params: Promise<{ id
   return (
     <section className="section">
       <div className="container-page grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
-        <BookImage src={book.image} alt={book.title} className="mx-auto aspect-[3/4] w-full max-w-sm rounded-lg border md:max-w-none" />
+        <BookImage src={book.image} alt={book.title} priority sizes="(min-width: 768px) 40vw, 90vw" className="mx-auto aspect-[3/4] w-full max-w-sm rounded-lg border md:max-w-none" />
 
         <div>
           <span className="inline-block rounded-full border border-accent/50 px-3 py-0.5 text-xs font-medium text-accent">

@@ -40,7 +40,7 @@ export default async function MyBooksPage() {
                   <tr key={book._id}>
                     <td className={tdClass}>
                       <div className="flex items-center gap-4">
-                        <BookImage src={book.image} alt={book.title} className="h-16 w-12 shrink-0 rounded-sm" />
+                        <BookImage src={book.image} alt={book.title} sizes="48px" className="h-16 w-12 shrink-0 rounded-sm" />
                         <div className="min-w-0">
                           <Link href={`/books/${book._id}`} className="line-clamp-1 font-semibold hover:text-accent">
                             {book.title}

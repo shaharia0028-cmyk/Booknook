@@ -107,7 +107,7 @@ export function BookForm({ mode, book, user, onSuccess }: BookFormProps) {
       </div>
 
       <FormField id="image" label={mode === "add" ? "Book Image" : "Replace cover image (optional)"} error={errors.image}>
-        {mode === "edit" && book?.image && <BookImage src={book.image} alt={book.title} className="mb-2 h-24 w-[4.5rem] rounded-sm" />}
+        {mode === "edit" && book?.image && <BookImage src={book.image} alt={book.title} sizes="72px" className="mb-2 h-24 w-[4.5rem] rounded-sm" />}
         <Input
           id="image"
           name="image"

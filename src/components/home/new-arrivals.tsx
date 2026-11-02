@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { SectionHeading } from "@/components/section-heading";
-import { getLatestBooks } from "@/lib/books";
 import { BookCard } from "@/components/books/book-card";
+import { SectionHeading } from "@/components/section-heading";
+import { Button } from "@/components/ui/button";
+import { getLatestBooks } from "@/lib/books";
 
 export async function NewArrivals() {
   const books = await getLatestBooks(6);
@@ -14,8 +14,8 @@ export async function NewArrivals() {
 
         {books.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {books.map((book) => (
-              <BookCard key={book._id} book={book} />
+            {books.map((book, index) => (
+              <BookCard key={book._id} book={book} priority={index < 3} />
             ))}
           </div>
         ) : (

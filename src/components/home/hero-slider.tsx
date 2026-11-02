@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { A11y, Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,10 +9,13 @@ import "swiper/css/pagination";
 import { Button } from "@/components/ui/button";
 import { CatalogCard } from "./catalog-card";
 
+// "image" can be a file in public/slides (like below) or a full https:// link.
+// Leave it empty ("") to show the catalog card instead.
 const slides = [
   {
     title: "Find your next favourite book",
     text: "Browse titles shared by our readers, from classic novels to the newest releases.",
+    image: "/slides/slide-1.jpg",
     card: {
       callNo: "BN 100",
       title: "Browse",
@@ -21,6 +25,7 @@ const slides = [
   {
     title: "Share a book from your shelf",
     text: "Add your own books so other readers can discover them and borrow them.",
+    image: "/slides/slide-2.jpg",
     card: {
       callNo: "BN 200",
       title: "Share",
@@ -30,6 +35,7 @@ const slides = [
   {
     title: "Borrow it, read it, return it",
     text: "Borrow in one click and follow every title you have on loan from your own page.",
+    image: "/slides/slide-3.jpg",
     card: {
       callNo: "BN 300",
       title: "Borrow",
@@ -49,7 +55,7 @@ export function HeroSlider() {
           autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           pagination={{ clickable: true }}
         >
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <SwiperSlide key={slide.title}>
               <div className="grid min-h-[600px] items-center gap-10 pb-20 pt-12 lg:min-h-[560px] lg:grid-cols-2 lg:gap-16 lg:pt-16">
                 <div>
@@ -61,7 +67,23 @@ export function HeroSlider() {
                     <Link href="/books">Browse Books</Link>
                   </Button>
                 </div>
-                <CatalogCard {...slide.card} />
+
+                {slide.image ? (
+                  <div className="mx-auto w-full max-w-md -rotate-2 rounded-md border bg-card p-2 shadow-xl shadow-primary/10">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-muted">
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        fill
+                        sizes="(min-width: 1024px) 448px, 90vw"
+                        priority={index === 0}
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <CatalogCard {...slide.card} />
+                )}
               </div>
             </SwiperSlide>
           ))}

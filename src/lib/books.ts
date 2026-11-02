@@ -16,20 +16,25 @@ export async function getLatestBooks(limit = 6): Promise<Book[]> {
   }
 }
 
-/** Public list for the All Books page, with optional search text and category. */
-export async function getBooks(filters: { search?: string; category?: string } = {}) {
-  if (!API_URL) return { books: [] as Book[], failed: true };
+export type BooksPage = { books: Book[]; total: number; page: number; pages: number; failed: boolean };
+
+/** Public list for the All Books page (20 per page), with optional search text and category. */
+export async function getBooks(filters: { search?: string; category?: string; page?: number } = {}): Promise<BooksPage> {
+  const empty: BooksPage = { books: [], total: 0, page: 1, pages: 1, failed: true };
+  if (!API_URL) return empty;
 
   const query = new URLSearchParams();
   if (filters.search) query.set("search", filters.search);
   if (filters.category) query.set("category", filters.category);
+  if (filters.page && filters.page > 1) query.set("page", String(filters.page));
 
   try {
     const res = await fetch(`${API_URL}/books?${query.toString()}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`API responded with ${res.status}`);
-    return { books: (await res.json()) as Book[], failed: false };
+    const data = (await res.json()) as Omit<BooksPage, "failed">;
+    return { ...data, failed: false };
   } catch (error) {
     console.error("Failed to load books:", error);
-    return { books: [] as Book[], failed: true };
+    return empty;
   }
 }
