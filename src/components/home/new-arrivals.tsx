@@ -10,17 +10,22 @@ export async function NewArrivals() {
   return (
     <section className="section">
       <div className="container-page">
-        <SectionHeading title="New Arrivals" description="The latest books added by our readers." />
+        <SectionHeading
+          title="New Arrivals"
+          description="The latest books added by our readers."
+        />
 
         {books.length > 0 ? (
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 xl:grid-cols-6">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {books.map((book, index) => (
-              <BookCard key={book._id} book={book} compact priority={index < 3} />
+              <BookCard key={book._id} book={book} priority={index < 3} />
             ))}
           </div>
         ) : (
           <div className="mx-auto max-w-xl rounded-lg border border-dashed p-10 text-center">
-            <p className="section-text">No books have been added yet. Be the first to share one.</p>
+            <p className="section-text">
+              No books have been added yet. Be the first to share one.
+            </p>
             <Button asChild className="mt-6">
               <Link href="/add-book">Add Book</Link>
             </Button>
