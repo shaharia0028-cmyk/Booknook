@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { BookOpen, Cpu, FlaskConical, Landmark, Newspaper, Smile } from "lucide-react";
+import { BookOpen, FlaskConical, Landmark, Shapes, Smile } from "lucide-react";
 import { SectionHeading } from "@/components/section-heading";
 
 const categories = [
   { name: "Fiction", Icon: BookOpen },
-  { name: "Non-Fiction", Icon: Newspaper },
   { name: "Science", Icon: FlaskConical },
   { name: "History", Icon: Landmark },
-  { name: "Technology", Icon: Cpu },
-  { name: "Children", Icon: Smile },
+  { name: "Kids", Icon: Smile },
+  { name: "Others", Icon: Shapes },
 ];
 
 export function TopCategories() {
@@ -16,7 +15,7 @@ export function TopCategories() {
     <section className="section">
       <div className="container-page">
         <SectionHeading title="Top Categories" description="Pick a shelf and start reading." />
-        <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
           {categories.map(({ name, Icon }) => (
             <li key={name}>
               <Link

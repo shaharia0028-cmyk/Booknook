@@ -13,9 +13,9 @@ export async function NewArrivals() {
         <SectionHeading title="New Arrivals" description="The latest books added by our readers." />
 
         {books.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 xl:grid-cols-6">
             {books.map((book, index) => (
-              <BookCard key={book._id} book={book} priority={index < 3} />
+              <BookCard key={book._id} book={book} compact priority={index < 3} />
             ))}
           </div>
         ) : (

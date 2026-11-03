@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export default async function MyBorrowsPage() {
   await requireUser("/my-borrows");
-  const { data: borrows } = await serverApiGet<Borrow[]>("/borrows/mine");
+  const { data: borrows } = await serverApiGet<Borrow[]>("/borrows");
 
   return (
     <>

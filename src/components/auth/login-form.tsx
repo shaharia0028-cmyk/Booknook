@@ -69,9 +69,13 @@ export function LoginForm() {
           id="password"
           label="Password"
           action={
-            <Link href="/forgot-password" className="text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline">
+            <button
+              type="button"
+              onClick={() => toast.info("Password reset is not available yet.")}
+              className="text-sm text-muted-foreground underline-offset-4 hover:text-accent hover:underline"
+            >
               Forgot password?
-            </Link>
+            </button>
           }
         >
           <PasswordInput id="password" name="password" autoComplete="current-password" placeholder="Your password" required />

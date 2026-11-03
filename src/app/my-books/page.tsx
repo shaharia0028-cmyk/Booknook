@@ -13,8 +13,9 @@ export const metadata: Metadata = { title: "My Books" };
 export const dynamic = "force-dynamic";
 
 export default async function MyBooksPage() {
-  await requireUser("/my-books");
-  const { data: books } = await serverApiGet<Book[]>("/books/mine");
+  const user = await requireUser("/my-books");
+  const { data } = await serverApiGet<{ books: Book[] }>(`/books?email=${encodeURIComponent(user.email)}&limit=100`);
+  const books = data?.books ?? null;
 
   return (
     <>

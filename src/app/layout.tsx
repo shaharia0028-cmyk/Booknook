@@ -7,7 +7,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 
 export const metadata: Metadata = {
-  title: { default: "BookNook", template: "%s | BookNook" },
+  title: { default: "BookNook", template: "BookNook | %s" },
   description: "A community library where readers share, borrow and return books.",
 };
 

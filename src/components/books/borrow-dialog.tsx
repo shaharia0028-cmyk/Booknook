@@ -34,7 +34,7 @@ export function BorrowDialog({ bookId, title, copies, userName, userEmail }: Bor
   const handleConfirm = async () => {
     setLoading(true);
     try {
-      await apiRequest(`/books/${bookId}/borrow`, { method: "POST" });
+      await apiRequest("/borrows", { method: "POST", body: { bookId } });
       toast.success("Book borrowed! Return it within 7 days.");
       setOpen(false);
       router.refresh();

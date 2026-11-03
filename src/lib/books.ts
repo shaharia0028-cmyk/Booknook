@@ -7,9 +7,10 @@ export async function getLatestBooks(limit = 6): Promise<Book[]> {
   if (!API_URL) return [];
 
   try {
-    const res = await fetch(`${API_URL}/books/latest?limit=${limit}`, { cache: "no-store" });
+    const res = await fetch(`${API_URL}/books?limit=${limit}`, { cache: "no-store" });
     if (!res.ok) throw new Error(`API responded with ${res.status}`);
-    return (await res.json()) as Book[];
+    const data = (await res.json()) as { books: Book[] };
+    return data.books;
   } catch (error) {
     console.error("Failed to load latest books:", error);
     return [];
